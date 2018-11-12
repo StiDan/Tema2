@@ -1,0 +1,26 @@
+version: "2.3"
+services:     
+  spring-boot-rest-docker-app:
+    image: springboot
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 8765:8080
+    volumes:
+      - /data/spring-boot-app
+      
+  db:
+    image: mysql:5.7
+    ports:
+    - "3306:3306"
+    container_name: mysql-container
+    volumes:
+     - ./data/db:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: parola
+      MYSQL_DATABASE: tema2
+      MYSQL_USER: dan
+      MYSQL_PASSWORD: parola
+      
